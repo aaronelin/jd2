@@ -6,11 +6,10 @@ name: jd_plantBean
 on:
   workflow_dispatch:
   schedule:
-    - cron: '0 18,0-13/1 * * *'
+    - cron: '16, 17,23,3,0-17/4 * * *'
   watch:
     types: started
-  repository_dispatch:
-    types: pantBean
+
 jobs:
   build:
 
@@ -24,11 +23,9 @@ jobs:
           node-version: 10.x
       - name: npm install
         run: |
-          cd ~/scripts
           npm install
       - name: '运行 【种豆得豆】'
         run: |
-          cd ~/scripts
           node jd_plantBean.js
         env:
           JD_COOKIE: ${{ secrets.JD_COOKIE }}
@@ -41,4 +38,3 @@ jobs:
           BARK_SOUND: ${{ secrets.BARK_SOUND }}
           DD_BOT_TOKEN: ${{ secrets.DD_BOT_TOKEN }}
           DD_BOT_SECRET: ${{ secrets.DD_BOT_SECRET }}
-          IGOT_PUSH_KEY: ${{ secrets.IGOT_PUSH_KEY }}
